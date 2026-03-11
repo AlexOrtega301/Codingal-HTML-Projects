@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cards</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        /* Make the image circular */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            margin: 15px auto;
+            border: 3px solid #ddd;
+        }
+        /* Hide the default file input */
+        .upload-btn {
+            display: block;
+            margin: 10px auto;
+            cursor: pointer;
+        }
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card text-center" style="width: 18rem; margin:auto;">
+        <!-- Circular image -->
+        <img id="userImage" class="profile-img"
+             src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+             alt="User Image">
+
+        <!-- Upload button -->
+        <label for="imageUpload" class="btn btn-secondary upload-btn">Upload Image</label>
+        <input type="file" id="imageUpload" accept="image/*">
+
+        <div class="card-body">
+            <h5 class="card-title">@Fr33xp.xen_official</h5>
+            <p class="card-text">Download PVZ-fr33xp now :P</p>
+            <a href="#" class="btn btn-primary">See Profile</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Preview uploaded image
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('userImage').src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    });
+</script>
+
+</body>
+</html>
