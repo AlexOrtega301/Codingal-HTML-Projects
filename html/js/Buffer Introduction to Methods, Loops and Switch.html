@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Advanced Day & Time Program</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 80px;
+      }
+      #demo {
+        font-size: 24px;
+        font-weight: bold;
+        padding: 20px;
+        border-radius: 12px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="demo"></p>
+    <script>
+      var today = new Date();
+      var day;
+      switch (today.getDay()) {
+        case 0: day = "Sunday"; break;
+        case 1: day = "Monday"; break;
+        case 2: day = "Tuesday"; break;
+        case 3: day = "Wednesday"; break;
+        case 4: day = "Thursday"; break;
+        case 5: day = "Friday"; break;
+        case 6: day = "Saturday"; break;
+      }
+
+      // Format date & time
+      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+      var dateString = today.toLocaleDateString("en-US", options);
+      var timeString = today.toLocaleTimeString();
+
+      // Greeting based on time
+      var hour = today.getHours();
+      var greeting;
+      if (hour < 12) {
+        greeting = "☀️ Good Morning!";
+      } else if (hour < 18) {
+        greeting = "🌤️ Good Afternoon!";
+      } else if (hour < 22) {
+        greeting = "🌙 Good Evening!";
+      } else {
+        greeting = "🌌 Good Night!";
+      }
+
+      // Colors per day
+      var colors = {
+        "Sunday": "#FF5733",
+        "Monday": "#3498DB",
+        "Tuesday": "#2ECC71",
+        "Wednesday": "#9B59B6",
+        "Thursday": "#F39C12",
+        "Friday": "#E74C3C",
+        "Saturday": "#1ABC9C"
+      };
+
+      var demo = document.getElementById("demo");
+      demo.innerHTML = greeting + "<br>Today is <b>" + day + "</b><br>" +
+                       dateString + " " + timeString;
+      demo.style.backgroundColor = colors[day];
+      demo.style.color = "white";
+    </script>
+  </body>
+</html>
