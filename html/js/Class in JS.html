@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Class Inheritance</title>
+</head>
+<body>
+    <h2>JavaScript Class Inheritance</h2>
+
+    <!-- Step 5: Two <p> tags with unique ids -->
+    <p id="details"></p>
+    <p id="greetings"></p>
+
+    <!-- Step 6: Script starts -->
+    <script>
+        // Step 7: Create parent class with one property, static method, and non-static method
+        class Student {
+            constructor(name) {
+                this.studentName = name;
+            }
+
+            static hello() {
+                return "Hello!";
+            }
+
+            present() {
+                return "My name is " + this.studentName;
+            }
+        }
+
+        // Step 8: Inherit class with extra property and method
+        class Grade extends Student {
+            constructor(name, grade) {
+                super(name);  // parent constructor call
+                this.studentGrade = grade;
+            }
+
+            show() {
+                return this.present() + ", from " + this.studentGrade;
+            }
+        }
+
+        // Step 9: Create object for child class
+        let myStudent = new Grade("Tina", "Grade 6");
+        document.getElementById("details").innerHTML = myStudent.show();
+
+        // Step 10: Access static method from parent class
+        document.getElementById("greetings").innerHTML = Student.hello();
+    </script>
+</body>
+</html>
