@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Objects, Data Structure and Array</title>
+</head>
+<body>
+<h2>JavaScript Objects, Data Structure and Array</h2>
+
+<script>
+    // Step 6: Create an object
+    var student = {
+        name: 'Riya',
+        age: '12',
+        Grade: '7',
+        hobbies: 'Drawing',
+        fav_sport: 'Cricket'
+    };
+
+    // Step 7: Create an array
+    var color = ["white", "black", "red", "green", "blue"];
+
+    // Step 8: Access object properties
+    document.write("Student name is: " + student.name + "<br>");
+    document.write("Student favorite sport is: " + student.fav_sport + "<br>");
+
+    // Step 9: Print array joined with special character
+    document.write("Before Poping the colors are: " + color.join("A") + "<br>");
+
+    // Step 10: Access array value by index
+    document.write("My favorite color is: " + color[3] + "<br>");
+
+    // Step 11: Pop the last element of array and print
+    color.pop();
+    document.write("After Poping the colors are: " + color.join("*") + "<br>");
+</script>
+
+</body>
+</html>
