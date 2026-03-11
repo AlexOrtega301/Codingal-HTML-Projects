@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activity Form</title>
+  <style>
+    body {
+      background-color: lightblue;
+    }
+
+    .text1 {
+      color: red;
+      font-weight: bold;
+      text-decoration: overline;
+    }
+
+    .text2 {
+      color: #ff66ff;
+      font-style: italic;
+      text-decoration: line-through;
+    }
+
+    .text3 {
+      color: rgb(70, 98, 120);
+      text-decoration: underline;
+    }
+
+    .text4 {
+      color: rgba(0, 0, 0, 0.4);
+      text-decoration: underline overline;
+    }
+
+    p {
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    p2 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 class="text1">Welcome to My Activity Page</h2>
+  <p class="text3">I love learning programming and creating projects in HTML, CSS, and JavaScript.</p>
+  <p class="text2">This form will validate your name and age before logging in.</p>
+
+  <!-- Form -->
+  <form name="myForm" onsubmit="return validateForm();">
+    Name: <input type="text" name="fname"><br><br>
+    Age: <input id="id" type="number" min="18"><br><br>
+    <input type="submit" value="Login">
+    <p id="message"></p>
+  </form>
+
+  <!-- Script -->
+  <script>
+    function validateForm() {
+      var x = document.forms["myForm"]["fname"].value;
+      var y = document.forms["myForm"]["id"].value;
+
+      if (x == "" || y == "") {
+        alert("Name and Age cannot be empty");
+        return false;
+      }
+      if (y < 18) {
+        alert("Age must be 18 or above");
+        return false;
+      } else {
+        alert("Successfully logged in");
+        return true;
+      }
+    }
+  </script>
+</body>
+</html>
