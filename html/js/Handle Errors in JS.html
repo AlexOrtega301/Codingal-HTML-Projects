@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Error Handling and Arrow Function</title>
+</head>
+<body>
+
+<h2>JavaScript Error Handling and Arrow Function</h2>
+<p>This example demonstrates how to use <b>catch</b> to display an error.</p>
+<p id="result"></p>
+
+<script>
+    // Step 7: Define an arrow function
+    let product = (a, b) => a * b;
+
+    // Step 8: Try block with intentional error
+    try {
+        // This will throw an error because "a" is not defined
+        document.getElementById("result").innerHTML = a;
+
+        // If we instead used the function, it would work:
+        // document.getElementById("result").innerHTML = product(5, 10);
+    } 
+    // Step 9: Catch block to handle error
+    catch (err) {
+        document.getElementById("result").innerHTML = "Error: " + err.message;
+    }
+</script>
+
+</body>
+</html>
