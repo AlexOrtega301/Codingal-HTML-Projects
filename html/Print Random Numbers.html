@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Datatypes, Let keyword and Loops</title>
+</head>
+<body>
+
+<h2>JavaScript Datatypes, Let keyword and Loops</h2>
+
+<p id="result"></p>
+
+<script>
+    // Step 7: Create two variables
+    var i; // undefined
+    var text = " "; // empty string
+
+    {
+        // Step 8: Assign value for i only inside the block using let
+        let i = 0;
+
+        // Step 9: While loop
+        while (i < 10) {
+            text += "The values inside the block: " + i + "<br>";
+            i++;
+        }
+
+        // Step 10: Print the result inside the block
+        document.getElementById("result").innerHTML = text;
+    }
+
+    // Step 11: Print the value of 'i' outside the block
+    document.write("The value of i outside the block is: " + i);
+</script>
+
+</body>
+</html>
