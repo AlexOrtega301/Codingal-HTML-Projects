@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation Form</title>
+
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    h1 {
+      color: #333;
+      text-decoration: underline;
+    }
+
+    form {
+      background: white;
+      display: inline-block;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    input {
+      margin: 10px;
+      padding: 5px;
+    }
+
+    #message {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    function validateForm() {
+      var x = document.forms["myForm"]["fname"].value;
+      var y = document.forms["myForm"]["id1"].value;
+
+      if (x == "" || y == "") {
+        alert("Name or age cannot be empty");
+        return false;
+      } 
+      else if (y < 18) {
+        alert("Age must be greater than or equal to 18");
+        return false;
+      } 
+      else {
+        alert("Successfully logged in");
+        return true;
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>My Activity</h1>
+  <p>I am learning how to create forms and validate them using HTML and JavaScript!</p>
+
+  <form name="myForm" onsubmit="return validateForm()">
+    Name: <input type="text" name="fname">
+    <br>
+    Age: <input id="id1" type="number" min="18">
+    <br>
+    <input type="submit" value="Login">
+  </form>
+
+  <p id="message"></p>
+</body>
+</html>
