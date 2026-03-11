@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sum of Arguments and Math Objects</title>
+</head>
+<body>
+
+<p>Sum of arguments and Math objects</p>
+<p id="demo"></p>
+
+<script>
+    // Step 7-11: Create a function to sum all arguments
+    function sumAll() {
+        var sum = 0;
+        for (var i = 0; i < arguments.length; i++) {
+            sum += arguments[i];
+        }
+        return sum;
+    }
+
+    // Step 12: Display the sum inside the <p> tag
+    document.getElementById("demo").innerHTML = sumAll(1, 123, 500, 115, 44, 88);
+
+    // Step 13: Print trigonometric values
+    var value = Math.sin(45 * Math.PI / 180); // Convert degrees to radians
+    document.write("Sin 45 is: " + value + "<br>");
+
+    var value1 = Math.cos(45 * Math.PI / 180); 
+    document.write("Cos 45 is: " + value1 + "<br>");
+
+    var value2 = Math.tan(45 * Math.PI / 180); 
+    document.write("Tan 45 is: " + value2 + "<br>");
+</script>
+
+</body>
+</html>
