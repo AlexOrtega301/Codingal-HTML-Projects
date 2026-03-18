@@ -1,0 +1,178 @@
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.navbar-brand {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.nav-link {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+header,
+footer {
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+}
+
+button,
+.btn {
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+}
+
+.input-group.date {
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10.2px);
+  -webkit-backdrop-filter: blur(10.2px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.input-group.date .form-control {
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+input[type="date"] {
+  color: white;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+
+}
+
+input[type="date"]:hover,
+input[type="date"]:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.card,
+.glass {
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+#apodImage {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 200px;
+}
+
+@media (max-width: 576px) {
+  #apodImage {
+    min-height: 200px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  #apodImage {
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 769px) {
+  #apodImage {
+    min-height: 400px;
+  }
+}
+
+.navbar,
+.h3,
+.container {
+  z-index: 1;
+  color: white;
+}
+
+#video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
