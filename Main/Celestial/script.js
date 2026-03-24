@@ -1,4 +1,4 @@
-const API_KEY = 'YOUR API KEY';
+const API_KEY = 'tj5CyBB1CrhE96W9AiBMAwwJY02tMTJ4IMXonRK2';
 
 function initializeDatepicker() {
   const today = new Date();
