@@ -110,3 +110,11 @@ button.btn-warning {
         height:180px;
     }
 }
+.skill-item {
+  cursor: pointer;
+  color: #ffcc00;
+}
+
+.skill-item:hover {
+  text-decoration: underline;
+}

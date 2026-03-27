@@ -291,3 +291,30 @@ function buildAndShowModal(meal) {
   const modal = new bootstrap.Modal($("#recipeModal"));
   modal.show();
 }
+// ================= SKILL MODAL LOGIC =================
+
+// skill descriptions
+const skillInfo = {
+  HTML: "Builds the structure of a webpage.",
+  CSS: "Adds style, colors, and layout.",
+  Bootstrap: "Provides ready-made design and layout tools.",
+  Flexbox: "Helps align and organize items on the page.",
+  JavaScript: "Makes websites interactive.",
+  API: "Brings real data from the internet."
+};
+
+// global click listener
+document.addEventListener("click", (e) => {
+  const skill = e.target.closest(".skill-item");
+  if (!skill) return;
+
+  const name = skill.dataset.skill;
+
+  // update modal content
+  document.getElementById("skillTitle").textContent = name;
+  document.getElementById("skillDescription").textContent = skillInfo[name];
+
+  // show modal
+  const modal = new bootstrap.Modal(document.getElementById("skillModal"));
+  modal.show();
+});
