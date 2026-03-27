@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Alex | Portfolio</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Your CSS (dark mode already inside) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Alex Ortega</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="container text-center py-5">
+  <h1>Hi, I'm Alex 👋</h1>
+  <p>
+    I'm learning web development using HTML, CSS, Bootstrap, and JavaScript.<br>
+    I'm currently building a project called <strong>Celestial Showcase</strong>.
+  </p>
+
+  <a href="#projects" class="btn btn-primary mt-3">View My Projects</a>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="container py-5">
+
+  <h2 class="text-center mb-4">My Projects</h2>
+
+  <p class="text-center text-muted">Projects will be added later.</p>
+
+ </section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="container py-5 text-center">
+  <h2>My Skills</h2>
+
+  <ul class="list-unstyled mt-3">
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>Bootstrap</li>
+    <li>JavaScript</li>
+    <li>VBScript (Windows 8)</li>
+  </ul>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="text-center py-3 border-top">
+  <p>© 2026 David Ortega</p>
+</footer>
+
+<!-- ================= MODAL ================= -->
+<div class="modal fade" id="recipeModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Recipe Details</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
+```
