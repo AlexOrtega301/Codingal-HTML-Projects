@@ -1,33 +1,34 @@
 /* =========================
    RECIPE EXPLORER
-   Working Version
+   Working Version + Filters
    ========================= */
 
-/* ---------- 1) Small helper to select elements ---------- */
+/* ---------- 0) Global state ---------- */
+let allMeals = [];
+
+/* ---------- 1) Small helper ---------- */
 const $ = (selector) => document.querySelector(selector);
 
-/* ---------- 2) Grab important UI elements ---------- */
+/* ---------- 2) UI elements ---------- */
 const searchInput = $("#searchInput");
 const searchBtn = $("#searchBtn");
 const results = $("#results");
 const message = $("#message");
 const suggested = $("#suggested");
+const categoryBar = $("#categoryBar");
 
-/* ---------- 3) API helper function ---------- */
+/* ---------- 3) API helper ---------- */
 async function api(url) {
   const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error("API request failed");
-  }
+  if (!res.ok) throw new Error("API request failed");
   return res.json();
 }
 
-/* ---------- 4) Message helper ---------- */
+/* ---------- 4) Helpers ---------- */
 function setMsg(text) {
   message.textContent = text;
 }
 
-/* ---------- 5) Safety helper: escape text ---------- */
 function esc(text) {
   return text
     ?.replaceAll("&", "&amp;")
@@ -36,30 +37,26 @@ function esc(text) {
     .replaceAll('"', "&quot;");
 }
 
-/* ---------- 6) Event listeners ---------- */
+/* ---------- 5) Events ---------- */
 
 searchBtn.addEventListener("click", search);
 
 searchInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") {
-    search();
-  }
+  if (e.key === "Enter") search();
 });
 
 if (suggested) {
   suggested.addEventListener("click", (e) => {
     const term = e.target.dataset.term;
     if (!term) return;
-
     searchInput.value = term;
     search();
   });
 }
 
-/* ---------- 7) Main search function ---------- */
+/* ---------- 6) SEARCH ---------- */
 
 async function search() {
-
   const query = searchInput.value.trim();
   results.innerHTML = "";
 
@@ -71,53 +68,121 @@ async function search() {
   setMsg("Searching recipes...");
 
   try {
-
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`;
     const data = await api(url);
 
-    const meals = data.meals || [];
-
-    if (!meals.length) {
-      setMsg("No recipes found...");
+    // 🔥 TU BLOQUE ADAPTADO
+    if (!data.meals) {
+      message.textContent = "No recipes found. Try another dish.";
+      results.innerHTML = "";
+      categoryBar.innerHTML = "";
       return;
     }
 
-    setMsg(`Found ${meals.length} recipe(s).`);
+    allMeals = data.meals;
 
-    results.innerHTML = meals.map(card).join("");
+    message.textContent = "Found " + data.meals.length + " recipe(s).";
 
-  } catch (err) {
+    buildCategoryBar(allMeals);
+    displayResults(allMeals);
+
+  } catch {
     setMsg("Something went wrong...");
   }
 }
 
-/* ---------- 8) Card builder function ---------- */
+/* ---------- 7) DISPLAY RESULTS ---------- */
+
+function displayResults(meals) {
+  results.innerHTML = meals.map(card).join("");
+}
+
+/* ---------- 8) CATEGORY BAR ---------- */
+
+function buildCategoryBar(meals) {
+  categoryBar.innerHTML = "";
+
+  const categorySet = new Set();
+
+  meals.forEach(function (meal) {
+    if (meal.strCategory) {
+      categorySet.add(meal.strCategory);
+    }
+  });
+
+  const categories = Array.from(categorySet).sort();
+
+  let buttonsHtml = `
+    <button class="btn btn-sm btn-secondary me-2 mb-2 category-btn" data-category="ALL">
+      All
+    </button>
+  `;
+
+  categories.forEach(function (cat) {
+    buttonsHtml += `
+      <button class="btn btn-sm btn-outline-secondary me-2 mb-2 category-btn"
+      data-category="${cat}">
+        ${cat}
+      </button>
+    `;
+  });
+
+  categoryBar.innerHTML = buttonsHtml;
+}
+
+/* ---------- 9) FILTER CLICK ---------- */
+
+document.addEventListener("click", (e) => {
+
+  // 👉 CATEGORY FILTER
+  const catBtn = e.target.closest(".category-btn");
+  if (catBtn) {
+    const category = catBtn.dataset.category;
+
+    if (category === "ALL") {
+      displayResults(allMeals);
+    } else {
+      const filtered = allMeals.filter(
+        (meal) => meal.strCategory === category
+      );
+      displayResults(filtered);
+    }
+    return;
+  }
+
+  // 👉 VIEW DETAILS
+  const viewBtn = e.target.closest(".view-btn");
+  if (viewBtn) {
+    fetchRecipeDetails(viewBtn.dataset.id);
+  }
+});
+
+/* ---------- 10) CARD ---------- */
 
 function card(meal) {
-
   return `
   <div class="col-md-4 mb-3">
     <div class="card recipe-card h-100">
 
-      <img src="${meal.strMealThumb}" class="card-img-top">
+      <img src="${meal.strMealThumb}" class="card-img-top" alt="${esc(meal.strMeal)}">
 
       <div class="card-body">
 
         <h5 class="card-title">${esc(meal.strMeal)}</h5>
 
         <span class="badge bg-primary tag-pill">
-        ${esc(meal.strArea)}
+          ${esc(meal.strArea)}
         </span>
 
         <span class="badge bg-success tag-pill">
-        ${esc(meal.strCategory)}
+          ${esc(meal.strCategory)}
         </span>
 
         <div class="mt-3">
-        <button class="btn btn-sm btn-dark view-btn"
-        data-id="${meal.idMeal}">
-        View Details
-        </button>
+          <button class="btn btn-sm btn-dark view-btn"
+          data-id="${meal.idMeal}">
+            View Details
+          </button>
         </div>
 
       </div>
@@ -126,29 +191,13 @@ function card(meal) {
   `;
 }
 
-/* ---------- 9) Event delegation for dynamic buttons ---------- */
-
-document.addEventListener("click", (e) => {
-
-  const btn = e.target.closest(".view-btn");
-
-  if (!btn) return;
-
-  const id = btn.dataset.id;
-
-  fetchRecipeDetails(id);
-});
-
-/* ---------- 10) Fetch recipe details ---------- */
+/* ---------- 11) DETAILS ---------- */
 
 async function fetchRecipeDetails(id) {
-
   setMsg("Loading recipe details...");
 
   try {
-
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-
     const data = await api(url);
 
     const meal = data.meals?.[0];
@@ -166,16 +215,14 @@ async function fetchRecipeDetails(id) {
   }
 }
 
-/* ---------- 11) Modal builder ---------- */
+/* ---------- 12) MODAL ---------- */
 
 function buildAndShowModal(meal) {
-
   const modalBody = $("#modalBody");
 
   let ingredients = "";
 
   for (let i = 1; i <= 20; i++) {
-
     const ing = meal[`strIngredient${i}`];
     const measure = meal[`strMeasure${i}`];
 
@@ -185,26 +232,27 @@ function buildAndShowModal(meal) {
   }
 
   modalBody.innerHTML = `
-  <h3>${esc(meal.strMeal)}</h3>
+    <h3>${esc(meal.strMeal)}</h3>
 
-  <img src="${meal.strMealThumb}" class="img-fluid mb-3">
+    <img src="${meal.strMealThumb}" class="img-fluid mb-3">
 
-  <h5>Ingredients</h5>
-  <ul>${ingredients}</ul>
+    <h5>Ingredients</h5>
+    <ul>${ingredients}</ul>
 
-  <h5>Instructions</h5>
-  <div class="instructions-box">
-  ${esc(meal.strInstructions)}
-  </div>
+    <h5>Instructions</h5>
+    <div class="instructions-box">
+      ${esc(meal.strInstructions)}
+    </div>
 
-  ${
-    meal.strYoutube
-      ? `<p class="mt-3">
-      <a href="${meal.strYoutube}" target="_blank" class="btn btn-danger">
-      Watch on YouTube
-      </a></p>`
-      : ""
-  }
+    ${
+      meal.strYoutube
+        ? `<p class="mt-3">
+            <a href="${meal.strYoutube}" target="_blank" class="btn btn-danger">
+              Watch on YouTube
+            </a>
+          </p>`
+        : ""
+    }
   `;
 
   const modal = new bootstrap.Modal($("#recipeModal"));
